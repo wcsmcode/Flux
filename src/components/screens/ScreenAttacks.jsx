@@ -62,6 +62,8 @@ const CurrentAttacks = () => (
                 <option value="bruteforce">Bruteforce</option>
                 <option value="ddos">DDoS Attack</option>
                 <option value="sql">SQL Injection</option>
+                <option value="xss">XSS Attack</option>
+                <option value="geography">Unsusal Geography</option>
               </optgroup>
             </select>
             {/* Custom Arrow cho Select */}
