@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Settings, User, Bell, Shield, Monitor } from 'lucide-react';
-import { Button } from './items';
+import { Button, Avatar } from './items';
 
 const SettingsModal = ({ isOpen, onClose }) => {
   // 1. Tạo state để quản lý Tab đang mở
@@ -16,13 +16,33 @@ const SettingsModal = ({ isOpen, onClose }) => {
           <div className="animate-in fade-in slide-in-from-right-4 duration-300">
             <h3 className="text-xl font-bold text-white mb-6">Account Settings</h3>
             <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Avatar name="Admin" color="bg-[#3ecf8e]" />
+                <Avatar className="hover:bg-[#374151]/20" name="+" color="bg-[none]" />
+              </div>
               <div className="flex flex-col gap-2">
                 <label className="text-xs font-bold text-[#a0a0a0] uppercase">Admin Username</label>
-                <input type="text" defaultValue="Solo Dev" className="bg-[#2a2a2a] border border-[#3e3e3e] rounded-lg px-4 py-2 text-white focus:border-[#3ecf8e] outline-none" />
+                <div className="flex flex-row">
+                  <input readOnly type="text" defaultValue="Solo Dev" className="basis-3/4 bg-[#2a2a2a] border border-[#3e3e3e] rounded-lg px-4 py-2 text-white focus:border-[#3ecf8e] outline-none" />
+                  <Button variant="outline" className="basis-1/4 ml-2">Update</Button>
+                </div>
+                
               </div>
               <div className="flex flex-col gap-2">
                 <label className="text-xs font-bold text-[#a0a0a0] uppercase">Email Address</label>
-                <input type="email" defaultValue="admin@flux.io" className="bg-[#2a2a2a] border border-[#3e3e3e] rounded-lg px-4 py-2 text-white focus:border-[#3ecf8e] outline-none" />
+                <div className="flex flex-row">
+                  <input readOnly type="email" defaultValue="admin@flux.io" className="basis-3/4 bg-[#2a2a2a] border border-[#3e3e3e] rounded-lg px-4 py-2 text-white focus:border-[#3ecf8e] outline-none" />
+                  <Button variant="outline" className="basis-1/4 ml-2">Update</Button>
+                </div>
+                
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-[#a0a0a0] uppercase">Password</label>
+                <div className="flex flex-row">
+                  <input readOnly type="password" defaultValue="••••••••" className="basis-3/4 bg-[#2a2a2a] border border-[#3e3e3e] rounded-lg px-4 py-2 text-white focus:border-[#3ecf8e] outline-none" />
+                  <Button variant="outline" className="basis-1/4 ml-2">Update</Button>
+                </div>
+                
               </div>
             </div>
           </div>

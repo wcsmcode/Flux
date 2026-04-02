@@ -136,3 +136,11 @@ export const ClickOutsideWrapper = ({ children, onClickOutside, className = "" }
     </div>
   );
 };
+
+export const Avatar = ({ name = "Flux", color, border }) => {
+  return (
+    <div className={`flex items-center justify-center w-12 h-12 rounded-full ${color || 'bg-indigo-600'} text-white font-bold text-lg uppercase shadow-inner ${border || 'border border-[#3e3e3e]'}`}>
+      {name.charAt(0)}
+    </div>
+  );
+};

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Zap, MapPinOff, CheckCircle, KeyRound } from 'lucide-react';
+import { useTabs } from '../TabContext.jsx';
 
 const events = [
   {
@@ -25,12 +26,13 @@ const events = [
 ];
 
 const SecurityTable = () => {
+  const { navigateTo } = useTabs();
   return (
     <section className="bg-[#2a2a2a] rounded-xl border border-[#3e3e3e] shadow-lg overflow-hidden">
       <div className="p-6 border-b border-[#3e3e3e] flex items-center justify-between">
         <h2 className="text-xl font-bold flex items-center gap-2"><Zap className="text-[#f87171]" size={20} /> Hot Events Requiring Action</h2>
         <div className="flex gap-2 text-xs">
-          <button className="bg-[#3e3e3e] px-3 py-1 rounded hover:bg-[#3e3e3e]/50">All</button>
+          <button onClick={() => navigateTo('Current Attacks')} className="bg-[#3e3e3e] px-3 py-1 rounded hover:bg-[#3e3e3e]/50">All</button>
           <button className="text-[#f87171] bg-[#f87171]/10 border border-[#f87171]/30 px-3 py-1 rounded font-medium">Critical</button>
         </div>
       </div>

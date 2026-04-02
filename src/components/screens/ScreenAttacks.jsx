@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShieldAlert, Crosshair, Zap, Search, ChevronDown} from 'lucide-react';
+import MapSecurity  from '../tools/WorldMap.jsx';
 
 const CurrentAttacks = () => (
   <div className="p-8 space-y-8">
@@ -21,7 +22,7 @@ const CurrentAttacks = () => (
         <Crosshair className="text-[#f87171]" /> Live Threat Map (Mockup)
       </h2>
       <div className="aspect-video bg-[#1c1c1c] rounded-lg flex items-center justify-center border border-[#3e3e3e] text-[#3e3e3e]">
-        [Bản đồ thế giới với các chấm đỏ nhấp nháy sẽ nằm ở đây]
+        <MapSecurity />
       </div>
     </div>
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sidebar from '/src/components/tools/Sidebar.jsx';
 import Header from '/src/components/tools/Header.jsx';
 // screens
@@ -6,12 +6,11 @@ import MainScreen from './components/screens/ScreenDashboard.jsx';
 import SecurityLogs from './components/screens/ScreenLogs.jsx';
 import CurrentAttacks from './components/screens/ScreenAttacks.jsx';
 import ClientManagement from './components/screens/ScreenClients.jsx';
+import { TabProvider, useTabs } from './components/TabContext.jsx'; // Import thêm useTabs
 
-
-
-const App = () => {
-  // Quản lý màn hình nào đang hiển thị
-  const [activeTab, setActiveTab] = useState('Dashboard');
+// Tách phần nội dung ra một component con để có thể dùng Hook useTabs
+const AppContent = () => {
+  const { activeTab } = useTabs(); // Lấy tab hiện tại từ kho chung
 
   const renderContent = () => {
     switch (activeTab) {
@@ -19,15 +18,14 @@ const App = () => {
       case 'Security Logs': return <SecurityLogs />;
       case 'Current Attacks': return <CurrentAttacks />;
       case 'Client Management': return <ClientManagement />;
-      // Thêm các case khác khi mày làm xong Tenants, Policies...
       default: return <MainScreen />;
     }
   };
 
   return (
     <div className="bg-[#1c1c1c] text-[#ededed] flex h-screen overflow-hidden font-sans">
-      {/* Truyền hàm setActiveTab vào Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      {/* Sidebar giờ không cần truyền props nữa, nó tự lấy từ Context */}
+      <Sidebar /> 
       
       <main className="flex-1 flex flex-col h-full overflow-y-auto">
         <Header />
@@ -36,6 +34,14 @@ const App = () => {
         </div>
       </main>
     </div>
+  );
+};
+
+const App = () => {
+  return (
+    <TabProvider>
+      <AppContent />
+    </TabProvider>
   );
 };
 

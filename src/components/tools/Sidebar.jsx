@@ -5,17 +5,19 @@ import {
   Zap, LayoutGrid, Activity, Users,
   FileKey2, FileBarChart, LogOut, ShieldAlert, BriefcaseBusiness, LogIn, Settings, UserPen
 } from 'lucide-react';
+import { useTabs } from '../TabContext.jsx';
 
 import SettingsModal from './settings.jsx';
 
-const Sidebar = ({ activeTab, setActiveTab }) => {
+const Sidebar = () => {
+  const { activeTab, setActiveTab } = useTabs();
   const [ShowTab, setShowTab] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   return (
     <aside className="w-64 bg-[#1c1c1c] border-r border-[#3e3e3e] flex flex-col h-full">
       {/* Logo Section */}
-      <div className="h-16 flex items-center gap-2 px-6 border-b border-[#3e3e3e]">
+      <div onClick={() => setActiveTab('Dashboard')} className="hover:cursor-pointer h-16 flex items-center gap-2 px-6 border-b border-[#3e3e3e]">
         <Zap className="w-7 h-7 text-[#3ecf8e]" />
         <span className="text-xl font-bold text-white uppercase tracking-tight">
           Flux <span className="text-[#3ecf8e] text-xs font-mono ml-1">v1.0</span>
