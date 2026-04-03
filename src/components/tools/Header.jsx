@@ -35,7 +35,7 @@ const Header = () => {
                 <Bell size={20} />
                 <span className="absolute top-2 right-2 w-2 h-2 bg-[#f87171] rounded-full border-2 border-[#1c1c1c]"></span>
               </button>
-              <DropdownWrapper isOpen={showNoti} className="w-80">
+              <DropdownWrapper isOpen={showNoti} className=" w-80">
                 {/* Nhét nội dung gì vào cũng được */}
                 <div className="p-4">Dữ liệu thông báo...</div>
               </DropdownWrapper>

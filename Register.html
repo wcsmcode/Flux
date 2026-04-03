@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flux | Register</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="src/index.css">
+    
+  </head>
+  <body class="bg-sbBg text-sbText antialiased">
+    <nav class="border-b border-sbBorder sticky top-0 bg-sbBg/80 backdrop-blur-md z-50">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i data-lucide="zap" class="text-sbTeal w-8 h-8"></i>
+                <span onclick="window.location.href='index.html'" class="hover:cursor-pointer text-xl font-bold tracking-tight text-white uppercase">FLUX</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-sbSubText">
+                <a href="#features" class="hover:text-sbTeal transition">Features</a>
+                <a href="#solutions" class="hover:text-sbTeal transition">Solutions</a>
+                <a href="#compliance" class="hover:text-sbTeal transition">Compliance</a>
+                <a href="#pricing" class="hover:text-sbTeal transition">Pricing</a>
+            </div>
+        </div>
+    </nav>
+    <div class="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-6 selection:bg-[#3ecf8e]/30 selection:text-[#3ecf8e]">
+  
+      <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-[#3ecf8e]/10 blur-[120px] rounded-full"></div>
+        <div class="absolute -bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-[#3ecf8e]/5 blur-[120px] rounded-full"></div>
+      </div>
+
+      <div class="relative w-full max-w-[480px] bg-[#111111]/80 backdrop-blur-xl border border-[#3e3e3e] rounded-2xl p-10 shadow-2xl shadow-black/50">
+        
+        <div class="flex flex-col items-center mb-8">
+          <div class="w-12 h-12 bg-[#3ecf8e]/10 border border-[#3ecf8e]/30 rounded-xl flex items-center justify-center mb-4 group cursor-default">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3ecf8e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:scale-110 transition-transform"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h1 class="text-2xl font-bold text-white tracking-tight">Register for <span class="text-[#3ecf8e]">Flux</span></h1>
+          <p class="text-sm text-[#a0a0a0] mt-1 text-center font-mono uppercase tracking-widest text-[10px]">Secure Organization Onboarding</p>
+        </div>
+
+        <form class="space-y-6">
+          
+          <div class="space-y-4 pt-1">
+            <p class="text-[10px] text-[#3ecf8e] font-mono leading-relaxed uppercase tracking-widest opacity-80 decoration-[#3ecf8e]/30 underline underline-offset-4 mb-2 font-bold tracking-widest">-- Organization Info --</p>
+            
+            <div>
+              <label class="block text-xs font-bold text-[#a0a0a0] uppercase tracking-wider mb-2" for="company">Company Name</label>
+              <input 
+                type="text" 
+                id="company"
+                placeholder="Flux Corp, Inc."
+                class="w-full bg-[#1c1c1c] border border-[#3e3e3e] rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-[#3e3e3e] focus:outline-none focus:border-[#3ecf8e] focus:ring-1 focus:ring-[#3ecf8e]/20 transition-all"
+              >
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-[#a0a0a0] uppercase tracking-wider mb-2" for="domain">Business Domain (e.g. Flux.io)</label>
+              <input 
+                type="text" 
+                id="domain"
+                placeholder="flux.io"
+                class="w-full bg-[#1c1c1c] border border-[#3e3e3e] rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-[#3e3e3e] focus:outline-none focus:border-[#3ecf8e] focus:ring-1 focus:ring-[#3ecf8e]/20 transition-all"
+              >
+            </div>
+          </div>
+
+          <div class="space-y-4 pt-3 border-t border-[#3e3e3e]/50">
+            <p class="text-[10px] text-[#3ecf8e] font-mono leading-relaxed uppercase tracking-widest opacity-80 decoration-[#3ecf8e]/30 underline underline-offset-4 mb-2 font-bold tracking-widest">-- Admin Setup --</p>
+            
+            <div class="flex gap-4">
+              <div class="flex-1">
+                <label class="block text-xs font-bold text-[#a0a0a0] uppercase tracking-wider mb-2" for="name">Full Name</label>
+                <input 
+                  type="text" 
+                  id="name"
+                  placeholder="Kietbreh depzai "
+                  class="w-full bg-[#1c1c1c] border border-[#3e3e3e] rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-[#3e3e3e] focus:outline-none focus:border-[#3ecf8e] focus:ring-1 focus:ring-[#3ecf8e]/20 transition-all"
+                >
+              </div>
+              <div class="flex-1">
+                <label class="block text-xs font-bold text-[#a0a0a0] uppercase tracking-wider mb-2" for="email">Work Email</label>
+                <input 
+                  type="email" 
+                  id="email"
+                  placeholder="admin@flux.io"
+                  class="w-full bg-[#1c1c1c] border border-[#3e3e3e] rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-[#3e3e3e] focus:outline-none focus:border-[#3ecf8e] focus:ring-1 focus:ring-[#3ecf8e]/20 transition-all"
+                >
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-[#a0a0a0] uppercase tracking-wider mb-2" for="password">System Password</label>
+              <input 
+                type="password" 
+                id="password"
+                placeholder="••••••••"
+                class="w-full bg-[#1c1c1c] border border-[#3e3e3e] rounded-lg px-4 py-2.5 text-sm text-white placeholder:text-[#3e3e3e] focus:outline-none focus:border-[#3ecf8e] focus:ring-1 focus:ring-[#3ecf8e]/20 transition-all"
+              >
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-[#3ecf8e] hover:bg-[#34b27a] text-black font-bold py-2.5 rounded-lg text-sm transition-all transform active:scale-[0.98] shadow-[0_0_20px_rgba(62,207,142,0.3)] mt-6">
+            Submit Registration Request
+          </button>
+
+          <div class="text-center pt-2">
+            <p class="text-[10px] text-[#a0a0a0] uppercase font-mono">
+              Organization is already registered? <a href="SignIn.html" class="text-[#3ecf8e] hover:underline font-bold">Sign In</a>
+            </p>
+          </div>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-[#3e3e3e]/50 text-center">
+          <p class="text-[10px] text-[#555555] font-mono leading-relaxed uppercase">
+            Encrypted Session: AES-256-GCM<br>
+            authorized personnel only
+          </p>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./auth/auth.js"></script>
+  </body>
+</html>

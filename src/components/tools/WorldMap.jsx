@@ -58,17 +58,17 @@ const MapSecurity = () => {
   };
 
   return (
-    <div className="relative w-full h-full min-h-[500px]">
+    <div className="relative z-0 w-full h-full min-h-[500px]">
       {/* Cái div này là nơi Leaflet sẽ "vẽ" lên */}
       <div ref={mapContainerRef} className="w-full h-full rounded-xl border border-[#3e3e3e]" />
       
       {/* Nút test để mày bấm xem hiệu ứng */}
-      <button 
+      {/* <button 
         onClick={() => addAttackMarker(Math.random() * 180 - 90, Math.random() * 360 - 180, "IP: 142.250.190.46")}
         className="absolute top-4 right-4 z-[1000] bg-[#3ecf8e] text-black px-3 py-1 rounded-md font-bold text-xs"
       >
         TEST ATTACK
-      </button>
+      </button> */}
     </div>
   );
 };
