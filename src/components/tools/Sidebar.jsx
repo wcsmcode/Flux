@@ -3,16 +3,36 @@ import {use, useState} from 'react';
 import { ClickOutsideWrapper, DropdownWrapper } from './items';
 import {
   Zap, LayoutGrid, Activity, Users,
-  FileKey2, FileBarChart, LogOut, ShieldAlert, BriefcaseBusiness, LogIn, Settings, UserPen
+  FileKey2, FileBarChart, LogOut, ShieldAlert, BriefcaseBusiness, LogIn, Settings, UserPen, BarChart3
 } from 'lucide-react';
 import { useTabs } from '../TabContext.jsx';
 
 import SettingsModal from './settings.jsx';
 
-const Sidebar = () => {
+const MENU_CONFIG = {
+  admin: [
+    { icon: <LayoutGrid size={20}/>, label: 'Dashboard', tab: 'Dashboard' },
+    { icon: <Activity size={20}/>, label: 'Security Logs', tab: 'Security Logs' },
+    { icon: <ShieldAlert size={20}/>, label: 'Current Attacks', tab: 'Current Attacks' },
+    { icon: <BriefcaseBusiness size={20}/>, label: 'Client Management', tab: 'Client Management' },
+  ],
+  client: [
+    { icon: <LayoutGrid size={20}/>, label: 'Dashboard', tab: 'Client Dashboard' },
+    { icon: <BarChart3 size={20}/>, label: 'Report', tab: 'Client Report' },
+    { icon: <ShieldAlert size={20}/>, label: 'Current Attacks', tab: 'Client Current Attacks' },
+  ],
+  admin_extra: [
+    { icon: <Users size={20}/>, label: 'Tenants', tab: null },
+    { icon: <FileKey2 size={20}/>, label: 'Security Policies', tab: null },
+  ],
+};
+
+const Sidebar = ({ type = 'admin' }) => {
   const { activeTab, setActiveTab } = useTabs();
   const [ShowTab, setShowTab] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const showExtra = type === 'admin';
+  const menuItems = MENU_CONFIG[type] || MENU_CONFIG.client;
 
   return (
     <aside className="w-64 bg-[#1c1c1c] border-r border-[#3e3e3e] flex flex-col h-full">
@@ -27,34 +47,35 @@ const Sidebar = () => {
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-2">
         <div className="pt-6 pb-2">
-          <p className="px-4 text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em]">Control</p>
+          <p className="px-4 text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em]">
+            {type === 'admin' ? 'Control' : 'Dashboard'}
+          </p>
         </div>
 
-        <NavItem icon={<LayoutGrid size={20}/>}
-          label="Dashboard"
-          active={activeTab === 'Dashboard'} 
-          onClick={() => setActiveTab('Dashboard')} />
+        {menuItems.map((item) => (
+          <NavItem 
+            key={item.label}
+            icon={item.icon}
+            label={item.label}
+            active={activeTab === item.tab}
+            onClick={() => item.tab && setActiveTab(item.tab)}
+          />
+        ))}
 
-        <NavItem icon={<Activity size={20}/>}
-          label="Security Logs" 
-          active={activeTab === 'Security Logs'} 
-          onClick={() => setActiveTab('Security Logs')}/>
-
-        <NavItem icon={<ShieldAlert size={20}/>}
-         label="Current Attacks" 
-         active={activeTab === 'Current Attacks'} 
-         onClick={() => setActiveTab('Current Attacks')}/>
-         
-        <NavItem icon={<BriefcaseBusiness size={20}/>} label="Client Management" 
-         active={activeTab === 'Client Management'} 
-         onClick={() => setActiveTab('Client Management')}/>
-        
-        <div className="pt-6 pb-2">
-          <p className="px-4 text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em]">Enterprise Admin</p>
-        </div>
-        
-        <NavItem icon={<Users size={20}/>} label="Tenants" />
-        <NavItem icon={<FileKey2 size={20}/>} label="Security Policies" />
+        {showExtra && (
+          <>
+            <div className="pt-6 pb-2">
+              <p className="px-4 text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em]">Enterprise Admin</p>
+            </div>
+            {MENU_CONFIG.admin_extra.map((item) => (
+              <NavItem 
+                key={item.label}
+                icon={item.icon}
+                label={item.label}
+              />
+            ))}
+          </>
+        )}
       </nav>
 
       {/* User Profile Section */}

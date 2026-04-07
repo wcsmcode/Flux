@@ -2,10 +2,10 @@ import React from 'react';
 import Sidebar from '/src/components/tools/Sidebar.jsx';
 import Header from '/src/components/tools/Header.jsx';
 // screens
-import MainScreen from './components/screens/admin/ScreenDashboard.jsx';
-import SecurityLogs from './components/screens/admin/ScreenLogs.jsx';
-import CurrentAttacks from './components/screens/admin/ScreenAttacks.jsx';
-import ClientManagement from './components/screens/admin/ScreenClients.jsx';
+import MainScreen from '/src/components/screens/client/ClientScreenDashboard.jsx';
+import CurrentAttacks from '/src/components/screens/client/ClientScreenAttacks.jsx';
+import Report from '/src/components/screens/client/ClientScreenReport.jsx';
+//import CurrentAttacks from './components/screens/client/ClientScreenAttacks.jsx';
 import { TabProvider, useTabs } from './components/TabContext.jsx'; // Import thêm useTabs
 
 // Tách phần nội dung ra một component con để có thể dùng Hook useTabs
@@ -14,10 +14,9 @@ const AppContent = () => {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'Dashboard': return <MainScreen />;
-      case 'Security Logs': return <SecurityLogs />;
-      case 'Current Attacks': return <CurrentAttacks />;
-      case 'Client Management': return <ClientManagement />;
+      case 'Client Dashboard': return <MainScreen />;
+      case 'Client Current Attacks': return <CurrentAttacks />;
+      case 'Client Report': return <Report />;
       default: return <MainScreen />;
     }
   };
@@ -25,7 +24,7 @@ const AppContent = () => {
   return (
     <div className="bg-[#1c1c1c] text-[#ededed] flex h-screen overflow-hidden font-sans">
       {/* Sidebar giờ không cần truyền props nữa, nó tự lấy từ Context */}
-      <Sidebar type="admin" /> 
+      <Sidebar type="client" /> 
       
       <main className="flex-1 flex flex-col h-full overflow-y-auto">
         <Header />

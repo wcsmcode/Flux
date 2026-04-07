@@ -1,6 +1,6 @@
 import React from 'react';
-import { ShieldAlert, Crosshair, Zap, Search, ChevronDown} from 'lucide-react';
-import MapSecurity  from '../tools/WorldMap.jsx';
+import { ShieldAlert, Crosshair, Zap, Search, ChevronDown, MapPinX} from 'lucide-react';
+import MapSecurity  from '../../tools/WorldMap.jsx';
 
 const CurrentAttacks = () => (
   <div className="p-8 space-y-8">
@@ -10,6 +10,15 @@ const CurrentAttacks = () => (
           <div className="p-3 bg-[#f87171]/10 rounded-lg text-[#f87171]"><Zap size={24} /></div>
           <div>
             <p className="text-xs text-[#a0a0a0] uppercase font-bold tracking-wider">Active Incursions</p>
+            <p className="text-2xl font-bold">03</p>
+          </div>
+        </div>
+      </div>
+      <div className="bg-[#2a2a2a] p-6 rounded-xl border-l-4 border-l-[#fbbf24] border border-[#3e3e3e]">
+        <div className="flex items-center gap-4">
+          <div className="p-3 bg-[#fbbf24]/10 rounded-lg text-[#fbbf24]"><MapPinX size={24} /></div>
+          <div>
+            <p className="text-xs text-[#a0a0a0] uppercase font-bold tracking-wider">Blocked IP</p>
             <p className="text-2xl font-bold">03</p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { resolve, dirname } from 'path'
+import { dirname, resolve } from 'path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -12,8 +12,13 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        auth: resolve(__dirname, 'auth.html'),
       },
     },
+  },
+  resolve: {
+    alias: [
+      { find: /^\/src\/(.*)/, replacement: `${resolve(__dirname, 'src')}/$1` },
+      { find: /^src\/(.*)/, replacement: `${resolve(__dirname, 'src')}/$1` },
+    ],
   },
 })
