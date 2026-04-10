@@ -42,8 +42,15 @@ const SettingsModal = ({ isOpen, onClose }) => {
                   <input readOnly type="password" defaultValue="••••••••" className="basis-3/4 bg-[#2a2a2a] border border-[#3e3e3e] rounded-lg px-4 py-2 text-white focus:border-[#3ecf8e] outline-none" />
                   <Button variant="outline" className="basis-1/4 ml-2">Update</Button>
                 </div>
-                
               </div>
+              <hr className="border-[#f87171] my-6 border-t border-[#3e3e3e]" />
+              <div className="flex justify-center gap-2">
+                <p className="text-[#f87171] font-bold">Danger Zone</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-xs font-bold text-[#a0a0a0] uppercase">Delete account</label>
+                  <Button variant="danger" className="basis-1/4 ml-2">Delete</Button>
+              </div>       
             </div>
           </div>
         );

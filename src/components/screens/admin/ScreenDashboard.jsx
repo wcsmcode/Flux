@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import StatsCard from '/src/components/tools/StatsCard';
 import SecurityTable from '/src/components/tools/SecurityTable';
 import {Select} from '/src/components/tools/items.jsx';
+import BandwidthUsage from '/src/components/tools/bandwith.jsx';
 
 import {
    ShieldAlert,  LogIn, UserX , Building2, LineChart, ArrowRight, CodeXml
@@ -15,9 +16,35 @@ const MainScreen = () => {
     { value: 'client-d', label: 'Client D' },
   ];
   const [selectedClient, setSelectedClient] = useState(Clients[0].value);
+  const [log, setLog] = useState(() => {
+      const savedLog = sessionStorage.getItem('flux_logs');
+      return savedLog ? JSON.parse(savedLog) : [
+        "[2026-03-31 08:30:12] INFO: System integrity check passed.",
+        "[2026-03-31 08:31:05] WARN: Multiple failed logins from IP 103.x.x.x",
+        "[2026-03-31 08:32:44] TRACE: Tenant 'AcmeCorp' updated Security Policy #4."
+      ];
+    });
+  
+    useEffect(() => {
+    sessionStorage.setItem('flux_logs', JSON.stringify(log));
+    }, [log]);
+  
+  const scrollRef = useRef(null); // Tạo tham chiếu đến điểm cuối
+
+  // Hàm tự động cuộn
+  const scrollToBottom = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Theo dõi mảng log, cứ hễ log thay đổi là cuộn
+  useEffect(() => {
+    scrollToBottom();
+  }, [log]);
 
   return (
-    <div className="flex-1 p-8 space-y-8 overflow-y-auto">  
+    <div className="flex-1 p-8 space-y-8 overflow-y-auto flux-scrollbar">  
           <div className="p-4 w-64">
             <Select 
               label="Clients"
@@ -38,7 +65,7 @@ const MainScreen = () => {
             <div className="xl:col-span-2 bg-[#2a2a2a] p-6 rounded-xl border border-[#3e3e3e] shadow-lg flex flex-col h-[400px]">
               <div className="flex items-center gap-3 mb-6">
                 <LineChart className="text-[#3ecf8e]" size={24} />
-                <h2 className="text-lg font-semibold">Failed Login Frequency (Brute-force detect)</h2>
+                <h2 className="text-lg font-semibold">Failed Login Frequency (Attacks detect)</h2>
                 <button className="ml-auto text-xs text-[#3ecf8e] hover:underline flex items-center gap-1">
                   View details <ArrowRight size={12} />
                 </button>
@@ -55,37 +82,48 @@ const MainScreen = () => {
               </div>
             </div>
 
-            <div className="bg-[#2a2a2a] p-6 rounded-xl border border-[#3e3e3e] shadow-lg flex flex-col">
+            <div className="bg-[#2a2a2a] p-6 rounded-xl border border-[#3e3e3e] shadow-lg flex flex-col h-[400px]">
               <div className="flex items-center gap-3 mb-6">
                 <CodeXml className="text-[#3ecf8e]" size={24} />
                 <h2 className="text-lg font-semibold">Logs</h2>
               </div>
-              <div className="flex-1 flex flex-col justify-between bg-black rounded-lg p-4 mb-4">  
-                <div className="space-y-1.5 mb-4 font-mono text-[11px] overflow-y-auto">
-                  <p className="text-[#3ecf8e]">[2026-03-31 08:30:12] INFO: System integrity check passed.</p>
-                  <p className="text-[#f87171] animate-pulse">[2026-03-31 08:31:05] WARN: Multiple failed logins from IP 103.x.x.x</p>
-                  <p className="text-[#a0a0a0]">[2026-03-31 08:32:44] TRACE: Tenant 'AcmeCorp' updated Security Policy #4.</p> 
+              <div className="flex-1 flex flex-col bg-black rounded-lg p-4 mb-4 min-h-0 border border-[#3e3e3e]"> 
+                {/* 1. Vùng Logs: flex-1 để chiếm chỗ, overflow-y-auto để hiện thanh cuộn */}
+                <div className="flex-1 overflow-y-auto space-y-1.5 mb-2 font-mono text-[11px] pr-2 flux-scrollbar">
+                  {log.map((entry, index) => (
+                    <p key={index} className={`text-[${entry.includes("WARN") ? "#f87171" : entry.includes("INFO") ? "#3ecf8e" : "#a0a0a0"}] ${entry.includes("WARN") ? "animate-pulse" : ""}`}>
+                      {entry}
+                    </p>
+                  ))}
                 </div>
-                <div className="flex items-center gap-2 group pt-2">
+                <div className=" flex items-center gap-2 group pt-2 overflow-x-auto">
                   <span className="text-[#3ecf8e] font-bold select-none italic">~ $</span>
                   <input 
                     type="text"
                     autoFocus
-                    className="flex-1 bg-transparent border-none outline-none text-[#ededed] placeholder:text-[#3e3e3e] caret-[#3ecf8e]"
+                    className="flex-1 bg-transparent border-none outline-none text-[#ededed] placeholder:text-[#3e3e3e] caret-[#3ecf8e] overflow-x-auto"
                     placeholder="Type command (e.g. 'ban ip', 'clear', 'scan')..."
                     onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        console.log("Mày vừa ra lệnh:", e.target.value);
-                        e.target.value = ""; // Xóa sau khi Enter cho giống thật
+                      if (e.key === 'Enter' && e.target.value.trim() !== "") {
+                        const timestamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+                        const newLogEntry = `[${timestamp}] COMMAND: ${e.target.value}`;
+
+                        // Chỉ cần cập nhật State, React sẽ tự lo phần hiển thị (render)
+                        setLog(prev => [...prev, newLogEntry]);
+
+                        // Xóa input sau khi enter
+                        e.target.value = ""; 
                       }
                     }}
                   />
+                  
                 </div>
 
               </div>
             </div>
           </section>
 
+          <BandwidthUsage/>
           {/* SECURITY TABLE */}
           <SecurityTable />
         </div>

@@ -61,21 +61,6 @@ const Sidebar = ({ type = 'admin' }) => {
             onClick={() => item.tab && setActiveTab(item.tab)}
           />
         ))}
-
-        {showExtra && (
-          <>
-            <div className="pt-6 pb-2">
-              <p className="px-4 text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em]">Enterprise Admin</p>
-            </div>
-            {MENU_CONFIG.admin_extra.map((item) => (
-              <NavItem 
-                key={item.label}
-                icon={item.icon}
-                label={item.label}
-              />
-            ))}
-          </>
-        )}
       </nav>
 
       {/* User Profile Section */}

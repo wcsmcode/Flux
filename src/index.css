@@ -9,3 +9,27 @@
   --color-sbText: #ededed;
   --color-sbSubText: #a0a0a0;
 }
+
+/* Tùy chỉnh thanh cuộn cho Chrome/Edge/Safari */
+.flux-scrollbar::-webkit-scrollbar {
+  width: 5px; /* Siêu mỏng để không chiếm diện tích */
+}
+
+.flux-scrollbar::-webkit-scrollbar-track {
+  background: #000000; /* Tiệp màu với nền Terminal */
+}
+
+.flux-scrollbar::-webkit-scrollbar-thumb {
+  background: #333333; /* Màu xám tối mặc định */
+  border-radius: 10px;
+}
+
+.flux-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #3ecf8e; /* Chuyển xanh neon khi rê chuột vào */
+}
+
+/* Hỗ trợ Firefox */
+.flux-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #333333 #000000;
+}

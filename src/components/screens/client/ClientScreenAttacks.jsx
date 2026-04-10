@@ -3,7 +3,7 @@ import { ShieldAlert, Crosshair, Zap, Search, ChevronDown, MapPinX} from 'lucide
 import MapSecurity  from '../../tools/WorldMap.jsx';
 
 const CurrentAttacks = () => (
-  <div className="p-8 space-y-8">
+  <div className="p-8 space-y-8 flux-scrollbar">
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div className="bg-[#2a2a2a] p-6 rounded-xl border-l-4 border-l-[#f87171] border border-[#3e3e3e]">
         <div className="flex items-center gap-4">
