@@ -6,6 +6,7 @@ import MainScreen from './components/screens/admin/ScreenDashboard.jsx';
 import SecurityLogs from './components/screens/admin/ScreenLogs.jsx';
 import CurrentAttacks from './components/screens/admin/ScreenAttacks.jsx';
 import ClientManagement from './components/screens/admin/ScreenClients.jsx';
+import ScreenReportReciever from './components/screens/admin/ScreenReportReceiver.jsx';
 import { TabProvider, useTabs } from './components/TabContext.jsx'; // Import thêm useTabs
 
 // Tách phần nội dung ra một component con để có thể dùng Hook useTabs
@@ -18,6 +19,7 @@ const AppContent = () => {
       case 'Security Logs': return <SecurityLogs />;
       case 'Current Attacks': return <CurrentAttacks />;
       case 'Client Management': return <ClientManagement />;
+      case 'Report Receiver': return <ScreenReportReciever />;
       default: return <MainScreen />;
     }
   };

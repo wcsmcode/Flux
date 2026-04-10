@@ -3,7 +3,7 @@ import {use, useState} from 'react';
 import { ClickOutsideWrapper, DropdownWrapper } from './items';
 import {
   Zap, LayoutGrid, Activity, Users,
-  FileKey2, FileBarChart, LogOut, ShieldAlert, BriefcaseBusiness, LogIn, Settings, UserPen, BarChart3
+  FileKey2, Mail, LogOut, ShieldAlert, BriefcaseBusiness, LogIn, Settings, UserPen, BarChart3
 } from 'lucide-react';
 import { useTabs } from '../TabContext.jsx';
 
@@ -15,6 +15,7 @@ const MENU_CONFIG = {
     { icon: <Activity size={20}/>, label: 'Security Logs', tab: 'Security Logs' },
     { icon: <ShieldAlert size={20}/>, label: 'Current Attacks', tab: 'Current Attacks' },
     { icon: <BriefcaseBusiness size={20}/>, label: 'Client Management', tab: 'Client Management' },
+    { icon: <Mail size={20}/>, label: 'Reports', tab: 'Report Receiver' },
   ],
   client: [
     { icon: <LayoutGrid size={20}/>, label: 'Dashboard', tab: 'Client Dashboard' },
