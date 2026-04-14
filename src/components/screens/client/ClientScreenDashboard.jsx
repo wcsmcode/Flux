@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import StatsCard from '/src/components/tools/StatsCard';
 import BandwidthUsage from '/src/components/tools/bandwith.jsx';
 import {
-   ShieldAlert,  LogIn, UserX , Building2, LineChart, ArrowRight, CodeXml
+   ShieldAlert,  LogIn, UserX , Building2, LineChart, ArrowRight, CodeXml, CircleCheck, CircleAlert
 } from 'lucide-react';
 
 const MainScreen = () => {
+  const [IsDown, setIsDown] = useState(true);
   const [log, setLog] = useState(() => {
     const savedLog = sessionStorage.getItem('flux_logs');
     return savedLog ? JSON.parse(savedLog) : [
@@ -15,7 +16,44 @@ const MainScreen = () => {
     ];
   });
   return (
-    <div className="flex-1 p-8 space-y-8 overflow-y-auto">  
+      <div className="flex-1 p-8 space-y-8 overflow-y-auto">  
+        <div className="flex flex-row gap-4 min-h-0">
+          {/* Cột phải: System Status Panel (Sửa lại từ basis-2/3 thành flex-1 để tự dãn) */}
+          <div className="flex-1 grid grid-cols-2 gap-4">
+            
+            {/* 1. Overall Status Card */}
+            <div className={`p-4 rounded-xl border flex flex-col justify-center items-center transition-all ${
+              IsDown 
+              ? "bg-red-500/10 border-red-500/50 shadow-[0_0_15px_rgba(239,68,68,0.1)]" 
+              : "bg-emerald-500/10 border-emerald-500/50 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+            }`}>
+              <span className="text-[10px] uppercase tracking-widest text-zinc-500 mb-1 font-bold">Overall System</span>
+              <div className="flex items-center gap-2">
+                <h2 className={`text-xl font-black ${IsDown ? "text-red-500" : "text-emerald-500"}`}>
+                  {IsDown ? <div className="flex items-center gap-2"><CircleAlert size={20}/>CRITICAL</div> : <div className="flex items-center gap-2"><CircleCheck size={20}/>OPERATIONAL</div>}
+                </h2>
+              </div>
+            </div>
+
+            {/* 2. Server-Endpoint Status Card */}
+            <div className="p-4 rounded-xl border border-[#3e3e3e] bg-[#141414] flex flex-col justify-between">
+              <div className="flex justify-between items-start">
+                <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold">Endpoints</span>
+                <span className="text-[10px] text-zinc-400 font-mono">v2.4.0-stable</span>
+              </div>
+              
+              <div className="mt-2 space-y-2">
+                <div className="flex justify-between items-center text-[11px]">
+                  <span className="text-zinc-400">Main API Gateway</span>
+                  <span className="text-emerald-400 font-mono">99.2%</span>
+                </div>
+                <div className="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
+                  <div className="bg-emerald-500 h-full w-[99.2%]" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* STATS SECTION */}
         <section className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           <StatsCard title="Total Logins (24h)" value="45,102" trend="+5.2% vs yesterday" icon={<LogIn size={20}/>} color="sbTeal" />
